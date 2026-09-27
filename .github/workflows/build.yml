@@ -14,12 +14,7 @@ jobs:
         with:
           java-version: '17'
           distribution: 'temurin'
-      - name: Grant execute permission
-        run: chmod +x gradlew
       - name: Build with Gradle
-        run: ./gradlew build
-      - name: Upload artifact
-        uses: actions/upload-artifact@v3
+        uses: gradle/gradle-build-action@v2
         with:
-          name: symbioteai-jar
-          path: build/libs/*.jar
+          arguments: build
