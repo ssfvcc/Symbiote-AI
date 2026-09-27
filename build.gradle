@@ -1,0 +1,23 @@
+plugins {
+    id 'java'
+}
+
+version = '0.0.1'
+group = 'com.example.symbioteai'
+
+java {
+    toolchain {
+        languageVersion = JavaLanguageVersion.of(17)
+    }
+}
+
+repositories {
+    mavenCentral()
+}
+
+dependencies {
+}
+
+tasks.withType(JavaCompile).configureEach {
+    options.encoding = 'UTF-8'
+}
