@@ -1,0 +1,10 @@
+modLoader="javafml"
+loaderVersion="[47,)"
+license="MIT"
+
+[[mods]]
+modId="symbioteai"
+version="0.0.1"
+displayName="Symbiote AI"
+authors="you"
+description="A parasitic symbiote AI mod."
