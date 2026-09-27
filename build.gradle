@@ -1,23 +1,62 @@
 plugins {
+    id 'net.minecraftforge.gradle' version '5.1.+'
     id 'java'
 }
 
 version = '0.0.1'
-group = 'com.example.symbioteai'
+group = 'com.symbioteai'
+archivesBaseName = 'symbioteai'
 
-java {
-    toolchain {
-        languageVersion = JavaLanguageVersion.of(17)
+java.toolchain.languageVersion = JavaLanguageVersion.of(17)
+
+minecraft {
+    mappings channel: 'official', version: '1.20.1'
+
+    runs {
+        client {
+            workingDirectory project.file('run/client')
+            property 'forge.logging.markers', 'REGISTRIES'
+            property 'forge.logging.console.level', 'debug'
+            mods {
+                symbioteai {
+                    source sourceSets.main
+                }
+            }
+        }
+
+        server {
+            workingDirectory project.file('run/server')
+            property 'forge.logging.markers', 'REGISTRIES'
+            property 'forge.logging.console.level', 'debug'
+            mods {
+                symbioteai {
+                    source sourceSets.main
+                }
+            }
+        }
     }
 }
 
-repositories {
-    mavenCentral()
+dependencies {
+    minecraft 'net.minecraftforge:forge:1.20.1-47.3.0'
 }
 
-dependencies {
-}
+sourceSets.main.resources.srcDir 'src/main/resources'
 
 tasks.withType(JavaCompile).configureEach {
     options.encoding = 'UTF-8'
+}
+
+jar {
+    manifest {
+        attributes([
+            "Specification-Title"     : "symbioteai",
+            "Specification-Vendor"    : "symbioteai",
+            "Specification-Version"   : version,
+            "Implementation-Title"    : archivesBaseName,
+            "Implementation-Version"  : version,
+            "Implementation-Vendor"  : "symbioteai",
+            "Implementation-Timestamp": new Date().format("yyyy-MM-dd'T'HH:mm:ssZ")
+        ])
+    }
 }
